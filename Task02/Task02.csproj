@@ -42,11 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseFileWorker.cs" />
-    <Compile Include="HistoryWorker.cs" />
+    <Compile Include="BaseFileEditor.cs" />
+    <Compile Include="History.cs" />
+    <Compile Include="HistoryFileEditor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Worker.cs" />
+    <Compile Include="FileEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -56,6 +57,9 @@
       <Project>{3ab053b1-3188-4ae6-bbb9-f8d7227162b0}</Project>
       <Name>Task01</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="History\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
