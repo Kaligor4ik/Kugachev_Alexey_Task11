@@ -8,43 +8,36 @@ using Task01;
 
 namespace Task02
 {
-    class FileEditor : BaseFileEditor
+    internal class FileEditor : BaseReader
     {
-        public FileEditor(bool isEdit)
+        private string _value;
+
+        public FileEditor() : base() { }
+
+        public override void Print()
         {
-            Dir = Dir;
-            if (isEdit) _fileName = ChooseFileFromDirectory();
-            else FileName = FileName;
-            
+            ReadFromFile();
+            Console.WriteLine(_value);
         }
 
-        public string Text { get; set; }
-        public string Dir {
-            get { return _dir; }
-            set
-            {
-                Console.WriteLine("Укажите путь к файлу");
-                _dir = Console.ReadLine();
-                if(_dir.Last() != '\\')
-                {
-                    _dir = _dir + "\\";
-                }
-            }
-        }
-        public string FileName {
-            get { return _fileName; }
-            set
-            {
-                Console.WriteLine("Укажите имя файла с расширением");
-                _fileName = Console.ReadLine();
-            }
+        public override string ReadFromFile()
+        {
+            _value = FileUtils.ReadAllFromPath(FileInfo.FullName);
+            return _value;
         }
 
-        public void WriteFile(bool isRewrite)
+        public void WriteToFile(string text)
         {
-            if(isRewrite) FileUtils.RewriteToPath(Dir + FileName, Text);
-            else FileUtils.WriteToPath(Dir + FileName, Text);
-            new HistoryFileEditor(_fileName).WriteFile(ReadFromFile());
+            Console.WriteLine("Укажите действие:\n1)Добавить текст в файл\n2)Перезаписать файл");
+            string choose = Console.ReadLine();
+            if (choose.Equals("2"))
+            {
+                FileUtils.RewriteToPath(FileInfo.FullName, text);
+            }
+            else
+            {
+                FileUtils.WriteToPath(FileInfo.FullName, text);
+            }
         }
     }
 }
